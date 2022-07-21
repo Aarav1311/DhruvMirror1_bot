@@ -121,8 +121,9 @@ def get_readable_message():
             if PAGE_NO > pages and pages != 0:
                 globals()['COUNT'] -= STATUS_LIMIT
                 globals()['PAGE_NO'] -= 1
+        msg += "<b>Powered by @DhruvMirrorUpdates</b>\n\n"       
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
-            msg += f"<b>Name:</b> <code>{escape(str(download.name()))}</code>"
+            msg += f"<b>Name:</b> <code>{escape(str(download.name()))}</code>\n"
             msg += f"\n<b>Status:</b> <i>{download.status()}</i>"
             if download.status() not in [
                 MirrorStatus.STATUS_ARCHIVING,
@@ -149,7 +150,8 @@ def get_readable_message():
                 except:
                     pass
                 msg += f'\n<b>User:</b> ️<code>{download.message.from_user.first_name}</code>️(<code>{download.message.from_user.id}</code>)'
-                msg += f"\n<b>To Stop:</b><code>/{BotCommands.CancelMirror} {download.gid()}</code>"
+                msg += f"\n<b>To Stop:</b><code>/{BotCommands.CancelMirror} {download.gid()}</code>\n"
+                msg += "\n━━━━━━━━━━━━━━━━━━━━━━"
             elif download.status() == MirrorStatus.STATUS_SEEDING:
                 msg += f"\n<b>Size: </b>{download.size()}"
                 msg += f"\n<b>Speed: </b>{get_readable_file_size(download.torrent_info().upspeed)}/s"
